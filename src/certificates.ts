@@ -1,7 +1,6 @@
 // import path from 'path';
 import createDebug from 'debug';
-import { sync as mkdirp } from 'mkdirp';
-import { chmodSync as chmod } from 'fs';
+import { chmodSync as chmod, mkdirSync } from 'fs';
 import { openssl } from './utils';
 import { withCertificateAuthorityCredentials } from './certificate-authority';
 import {pathForDomain, getStableDomainPath, withDomainSigningRequestConfig, withDomainCertificateConfig} from './constants';
@@ -17,7 +16,7 @@ const debug = createDebug('devcert:certificates');
  */
 export default async function generateDomainCertificate(domains: string[]): Promise<void> {
   const domainPath = getStableDomainPath(domains);
-  mkdirp(pathForDomain(domainPath));
+  mkdirSync(pathForDomain(domainPath), { recursive: true });
 
   debug(`Generating private key for ${domains}`);
   let domainKeyPath = pathForDomain(domainPath, 'private-key.key');

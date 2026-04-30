@@ -2,8 +2,19 @@
   "name": "devcert",
   "version": "1.2.3",
   "description": "Generate trusted local SSL/TLS certificates for local SSL development",
-  "main": "dist/index.js",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "default": "./index.js"
+    }
+  },
   "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
@@ -27,31 +38,24 @@
   "homepage": "https://github.com/davewasmer/devcert#readme",
   "devDependencies": {
     "standard-version": "^9.5.0",
-    "typescript": "4.3.2"
+    "typescript": "^5.4.0"
   },
   "dependencies": {
-    "@types/configstore": "^2.1.1",
-    "@types/debug": "^0.0.30",
-    "@types/get-port": "^3.2.0",
-    "@types/glob": "^5.0.34",
-    "@types/lodash": "^4.14.92",
-    "@types/mkdirp": "^0.5.2",
-    "@types/node": "^8.5.7",
-    "@types/rimraf": "^2.0.2",
-    "@types/tmp": "^0.0.33",
+    "@types/debug": "^4.1.12",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.0.0",
+    "@types/tmp": "^0.2.0",
     "application-config-path": "^0.1.0",
     "command-exists": "^1.2.4",
-    "debug": "^3.1.0",
+    "debug": "^4.3.4",
     "eol": "^0.9.1",
-    "get-port": "^3.2.0",
-    "glob": "^7.1.2",
+    "get-port": "^5.1.1",
+    "glob": "^13.0.6",
     "is-valid-domain": "^0.1.6",
     "lodash": "^4.17.4",
-    "mkdirp": "^0.5.1",
     "password-prompt": "^1.0.4",
-    "rimraf": "^2.6.2",
-    "sudo-prompt": "^8.2.0",
-    "tmp": "^0.0.33",
-    "tslib": "^1.10.0"
+    "sudo-prompt": "^9.2.1",
+    "tmp": "^0.2.3",
+    "tslib": "^2.6.0"
   }
 }

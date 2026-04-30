@@ -1,7 +1,7 @@
 import { readFileSync as readFile, readdirSync as readdir, existsSync as exists } from 'fs';
 import createDebug from 'debug';
 import { sync as commandExists } from 'command-exists';
-import rimraf from 'rimraf';
+import { rmSync } from 'fs';
 import {
   isMac,
   isLinux,
@@ -136,5 +136,15 @@ export function configuredDomains() {
 export function removeDomain(requestedDomains: string | string[]) {
   const domains = Array.isArray(requestedDomains) ? requestedDomains : [requestedDomains];
   const domainPath = getStableDomainPath(domains);
-  return rimraf.sync(pathForDomain(domainPath));
+  return rmSync(pathForDomain(domainPath), { recursive: true, force: true });
 }
+
+const devcert = {
+  certificateFor,
+  hasCertificateFor,
+  configuredDomains,
+  removeDomain,
+  uninstall,
+};
+
+export default devcert;

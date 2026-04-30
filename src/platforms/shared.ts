@@ -4,7 +4,7 @@ import createDebug from 'debug';
 import assert from 'assert';
 import getPort from 'get-port';
 import http from 'http';
-import { sync as glob } from 'glob';
+import { globSync } from 'glob';
 import { readFileSync as readFile, existsSync as exists } from 'fs';
 import { run } from '../utils';
 import { isMac, isLinux , configDir, getLegacyConfigDir } from '../constants';
@@ -18,7 +18,7 @@ const debug = createDebug('devcert:platforms:shared');
  *  directory, with a version argument.
  */
 function doForNSSCertDB(nssDirGlob: string, callback: (dir: string, version: "legacy" | "modern") => void): void {
-  glob(nssDirGlob).forEach((potentialNSSDBDir) => {
+  globSync(nssDirGlob).forEach((potentialNSSDBDir) => {
     debug(`checking to see if ${ potentialNSSDBDir } is a valid NSS database directory`);
     if (exists(path.join(potentialNSSDBDir, 'cert8.db'))) {
       debug(`Found legacy NSS database in ${ potentialNSSDBDir }, running callback...`)

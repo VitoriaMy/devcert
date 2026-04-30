@@ -1,6 +1,5 @@
 import path from 'path';
-import { unlinkSync as rm, writeFileSync as writeFile, readFileSync as readFile } from 'fs';
-import { sync as mkdirp } from 'mkdirp';
+import { unlinkSync as rm, writeFileSync as writeFile, readFileSync as readFile, mkdirSync } from 'fs';
 import { template as makeTemplate } from 'lodash';
 import applicationConfigPath = require('application-config-path');
 import eol from 'eol';
@@ -110,9 +109,9 @@ export function getLegacyConfigDir(): string {
 }
 
 export function ensureConfigDirs() {
-  mkdirp(configDir);
-  mkdirp(domainsDir);
-  mkdirp(rootCADir);
+  mkdirSync(configDir, { recursive: true });
+  mkdirSync(domainsDir, { recursive: true });
+  mkdirSync(rootCADir, { recursive: true });
 }
 
 ensureConfigDirs();
